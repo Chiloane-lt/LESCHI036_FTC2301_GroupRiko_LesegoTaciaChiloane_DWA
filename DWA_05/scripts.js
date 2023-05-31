@@ -2,6 +2,9 @@
 
 /**
  * @typedef {object} html
+ * @prop {HTMLElement} FormData
+ * @prop {HTMLElement} Result
+ * @prop {HTMLElement} Body
  */
 const html = {
     form: document.querySelector("[data-form]"),
@@ -17,13 +20,6 @@ html.form.addEventListener("submit", (event) => {
   const entries = new FormData(event.target);
   const { dividend, divider } = Object.fromEntries(entries);
 
-  class customError extends Error {
-    constructor(message) {
-      super(message);
-      this.name = 'InvalidInputError';
-    }
-  };
-
   if (!dividend || !divider) {
     html.result.innerHTML = 'Division not performed. Both values are required in inputs. Try again.';
   } else if (isNaN(dividend) || isNaN(divider)) {
@@ -37,7 +33,7 @@ html.form.addEventListener("submit", (event) => {
   try {
     if ((dividend < 0) || (divider < 0)) {
       html.result.innerHTML = 'Division not performed. Invalid number provided. Try again.';
-      throw new InvalidInputError;    
+      throw new Error ('InvalidInput');    
     }
   } catch(e) {
     console.error(e)

@@ -1,0 +1,5 @@
+1. Use html object to query select DOM nodes.
+2. Enabled 'show more' button. Removed unneccessary code. Must debug double clicks.
+3. Used abstraction to create 'show more' button.
+4. Used abstraction to create buttons.
+5. Add JSDoc.

@@ -1,4 +1,4 @@
-// Add export to data.
+// @ts-check
 
 export const BOOKS_PER_PAGE = 36;
 

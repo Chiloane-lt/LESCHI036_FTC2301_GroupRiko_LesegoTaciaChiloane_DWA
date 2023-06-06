@@ -7,30 +7,75 @@ import {
     authors,
     genres,
     books,
-} from "./data.js";
+} from './modules/data.js';
 
 import { 
     html,
     createBookButton,
-    createMoreButton
-} from "./functions.js";
+    createMoreButton,
+    setDisplayMode
+} from './modules/functions.js';
 
+/**
+ * Current page number. Each page has 36 books.
+ * 
+ * @type {number}
+ */
 let page = 1;
+
+if (!books || !books.length) {
+    throw new Error ('Could not access books. Please reload the page.')
+};
+
+/**
+ * A copy of the books array which can be used independently.
+ * 
+ * @type {Array}
+ */
 let matches = books;
 
+/**
+ * Document fragment of the first 36 books. Created on
+ * initially loading the web app. This fragment contains books as buttons.
+ * 
+ * @type {DocumentFragment}
+ */
 const starting = document.createDocumentFragment();
 
 createBookButton(starting, matches);
 
 html.view.mainHtml.appendChild(starting);
 
+/**
+ * HTML fragment which will be appended to the search form.
+ * Will be appended with the list of genres which are extracted from the
+ * `genres` object using `id`.
+ * 
+ * @type {DocumentFragment}
+ */
 const genreHtml = document.createDocumentFragment();
+
+/**
+ * Creates an option from element which will be appended to
+ * the genres fragment.
+ * 
+ * @type {HTMLOptionElement}
+ */
 const firstGenreElement = document.createElement('option');
+
 firstGenreElement.value = 'any';
 firstGenreElement.innerText = 'All Genres';
 genreHtml.appendChild(firstGenreElement);
 
 for (const [id, name] of Object.entries(genres)) {
+    
+    /**
+     * Creates genres as from options on the genres fragment.
+     * Genres are converted from `id` in
+     * the `genres` object.
+     * 
+     * @type {HTMLOptionElement}
+     */
     const element = document.createElement('option');
     element.value = id;
     element.innerText = name;
@@ -39,13 +84,34 @@ for (const [id, name] of Object.entries(genres)) {
 
 html.search.searchGenres.appendChild(genreHtml);
 
+/**
+ * HTML fragment which will be appended to the search form.
+ * Will be appended with the list of genres which are extracted from the
+ * `authors` object using `id`.
+ * 
+ * @type {DocumentFragment}
+ */
 const authorsHtml = document.createDocumentFragment();
+
+/**
+ * Default author options element.
+ * 
+ * @type {HTMLOptionElement}
+ */
 const firstAuthorElement = document.createElement('option');
 firstAuthorElement.value = 'any';
 firstAuthorElement.innerText = 'All Authors';
 authorsHtml.appendChild(firstAuthorElement);
 
 for (const [id, name] of Object.entries(authors)) {
+        
+    /**
+     * Author option element which will be appended to the search form.
+     * This will be converted to author name using the name matching the
+     * correspondong `id` on the authors object.
+     * 
+     * @type {HTMLOptionElement}
+     */
     const element = document.createElement('option');
     element.value = id;
     element.innerText = name;
@@ -56,12 +122,10 @@ html.search.searchAuthors.appendChild(authorsHtml);
 
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     html.display.settingsTheme.value = 'night'
-    document.documentElement.style.setProperty('--color-dark', '255, 255, 255');
-    document.documentElement.style.setProperty('--color-light', '10, 10, 20');
+    setDisplayMode('night');
 } else {
     html.display.settingsTheme.value.value = 'day';
-    document.documentElement.style.setProperty('--color-dark', '10, 10, 20');
-    document.documentElement.style.setProperty('--color-light', '255, 255, 255');
+    setDisplayMode('day');
 }
 
 html.scroll.moreButton.innerText = `Show more (${books.length - BOOKS_PER_PAGE})`;
@@ -89,27 +153,59 @@ html.preview.summaryClose.addEventListener('click', () => {
 
 html.display.settingsSubmit.addEventListener('submit', (event) => {
     event.preventDefault();
+
+    /**
+     * Empty formData object to store settings form input.
+     * 
+     * @type {FormData}
+     */
     const formData = new FormData(event.target);
+
+    /**
+     * Object created from extracted `formData` entries.
+     * 
+     * @type {object}
+     */
     const { theme } = Object.fromEntries(formData);
 
-    if (theme === 'night') {
-        document.documentElement.style.setProperty('--color-dark', '255, 255, 255');
-        document.documentElement.style.setProperty('--color-light', '10, 10, 20');
-    } else {
-        document.documentElement.style.setProperty('--color-dark', '10, 10, 20');
-        document.documentElement.style.setProperty('--color-light', '255, 255, 255');
-    };
+    setDisplayMode(theme);
     
     html.display.settingsOverlay.open = false;
 });
 
 html.search.searchSubmit.addEventListener('submit', (event) => {
     event.preventDefault();
+    
+    /**
+     * Empty formData object to store search form input.
+     * 
+     * @type {FormData}
+     */
     const formData = new FormData(event.target);
+
+    /**
+     * Object containg search form selections. Specifically title, author and genre.
+     * This will be used to conduct a search.
+     * 
+     * @type {object}
+     */
     const filters = Object.fromEntries(formData);
+
+    /**
+     * Empty array that will be used to store search results. Matching books
+     * will be copied from the books array and into this array.
+     * @type {Array}
+     */
     const result = [];
 
     for (const book of books) {
+        
+        /**
+         * Stores value to checks if the current book matches the genre specified
+         * on the search form.
+         * 
+         * @type {boolean}
+         */
         let genreMatch = filters.genre === 'any';
 
         for (const singleGenre of book.genres) {
@@ -136,6 +232,11 @@ html.search.searchSubmit.addEventListener('submit', (event) => {
     };
 
     html.view.mainHtml.innerHTML = '';
+
+    /**
+     * Empty fragment which will be appended with search results.
+     * @type {DocumentFragment}
+     */
     const newItems = document.createDocumentFragment();
 
     createBookButton(newItems, result);
@@ -150,6 +251,13 @@ html.search.searchSubmit.addEventListener('submit', (event) => {
 });
 
 html.scroll.moreButton.addEventListener('click', () => {
+    
+    /**
+     * Empty fragment which will be appended with 36 more books whenever the more button
+     * is pressed.
+     * 
+     * @type {DocumentFragment}
+     */
     const fragment = document.createDocumentFragment();
 
     createBookButton(fragment, matches);
@@ -160,8 +268,9 @@ html.scroll.moreButton.addEventListener('click', () => {
 });
 
 html.view.mainHtml.addEventListener('click', (event) => {
-    const pathArray = Array.from(event.path || event.composedPath())
-    let active = null
+    
+    const pathArray = Array.from(event.path || event.composedPath());
+    let active = null;
 
     for (const node of pathArray) {
         if (active) break;

@@ -24,7 +24,7 @@ import {
 let page = 1;
 
 if (!books || !books.length) {
-    throw new Error ('Could not access books. Please reload the page.')
+    throw new Error ('Could not access books. Please reload the page.');
 };
 
 /**

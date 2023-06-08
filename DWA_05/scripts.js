@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * @typedef {object} html
  * @prop {HTMLElement} FormData
@@ -38,5 +36,7 @@ html.form.addEventListener("submit", (event) => {
   } catch(e) {
     console.error(e)
   };
+
+  
 });
 

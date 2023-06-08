@@ -109,7 +109,7 @@ export const createMoreButton = (booksArray, page) => {
 /**
  * Changes display settings on the HTML settings overlay.
  * 
- * @param {'day' | 'night'} theme 
+ * @param {'day' | 'night'} theme  
  */
 export const setDisplayMode = (theme) => {
     if (theme === 'night') {

@@ -19,7 +19,7 @@ import {
 export const showPreview = () => {
     /**
      * Node list of all preview buttons.
-     * @type {NodeList}
+     * @type {NodeListOf}
      */
     const summaryList = document.querySelectorAll('[data-preview]');
 

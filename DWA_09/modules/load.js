@@ -3,7 +3,9 @@
 // @ts-check
 
 import { html } from './DOM.js';
-import { authors, books } from './data.js';
+import { BOOKS_PER_PAGE, authors, books } from './data.js';
+
+let page = 0;
 
 /**
  * Creates an html fragment given a book object.
@@ -72,6 +74,19 @@ export const createPreviewsFragment = (array, start, end) => {
   return previewFragment;
 };
 
+/**
+ * Determines the number of pages to travese on the app based on the total
+ * number of books available in the database.
+ *
+ * @param {array} array with total number of books.
+ * @param {number} currentPage current page.
+ * @returns {number}
+ */
+export const updateRemaining = (array, currentPage) => {
+  const remaining = array.length - (currentPage * BOOKS_PER_PAGE);
+  return remaining;
+};
+
 export const initialPageLoad = () => {
   if (!books || !Array.isArray(books)) {
     throw new Error('Source required');
@@ -80,4 +95,32 @@ export const initialPageLoad = () => {
   // Add check to see if fragment created
   html.view.mainHtml.appendChild(fragment);
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  page += 1;
+};
+
+export const createShowMoreButton = () => {
+  const booksRemaining = updateRemaining(books, page);
+  html.scroll.moreButton.innerHTML = `
+    <span>Show more</span>
+    <span class="list__remaining"> (${booksRemaining > 0 ? booksRemaining : 0})</span>
+`;
+};
+
+export const showMorePages = () => {
+  html.scroll.moreButton.addEventListener('click', () => {
+    let booksRemaining = updateRemaining(books, page);
+    if (booksRemaining <= 0) {
+      // eslint-disable-next-line no-unused-expressions
+      html.scroll.moreButton.disabled;
+    } else {
+      const start = page * BOOKS_PER_PAGE;
+      const end = (page + 1) * BOOKS_PER_PAGE;
+      const newFragment = createPreviewsFragment(books, start, end);
+
+      html.view.mainHtml.appendChild(newFragment);
+      page += 1;
+      booksRemaining = updateRemaining(books, page);
+      createShowMoreButton();
+    }
+  });
 };

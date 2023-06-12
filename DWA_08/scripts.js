@@ -18,7 +18,7 @@ import {
     searchTitle,
 } from './modules/functions.js';
 
-import { showPreview } from './modules/preview.js';
+import { showPreview } from './modules/summary.js';
 
 
 /* -----------------------------------------------PAGE LOAD------------------------------------------*/

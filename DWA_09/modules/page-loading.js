@@ -13,7 +13,7 @@ let page = 0;
  * via destructuring.
  * A template literate is used to create an html preview of the book.
  *
- * @param {import('./data').book} book is an object array with book properties.
+ * @param {import('./data.js').book} book is an object array with book properties.
  * @returns {HTMLElement}
  * */
 export const createPreview = (book) => {

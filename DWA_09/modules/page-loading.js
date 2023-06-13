@@ -4,6 +4,7 @@
 
 import { html } from './DOM.js';
 import { BOOKS_PER_PAGE, authors, books } from './data.js';
+import { BookButton } from './preview.js';
 
 let page = 0;
 
@@ -17,26 +18,7 @@ let page = 0;
  * @returns {HTMLElement}
  * */
 export const createPreview = (book) => {
-  const {
-    author, image, title, id,
-  } = book;
-
-  const newElement = document.createElement('button');
-  newElement.className = 'preview';
-  newElement.setAttribute('data-preview', id);
-
-  newElement.innerHTML = `
-        <img
-                class="preview__image"
-                src="${image}"
-            />
-            
-            <div class="preview__info">
-                <h3 class="preview__title">${title}</h3>
-                <div class="preview__author">${author}</div>
-            </div>
-        `;
-
+  const newElement = new BookButton(book);
   return newElement;
 };
 

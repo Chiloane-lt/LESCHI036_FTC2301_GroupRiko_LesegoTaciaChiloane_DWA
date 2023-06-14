@@ -2,6 +2,8 @@
 
 * {
     box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
 }
 
 /* counter body */
@@ -12,17 +14,16 @@
     align-items: center;
     justify-content: center;
     background-color: rgb(24, 29, 27);
-    padding: 10rem;
+    padding: 4rem;
+    height: 100vh;
 }
+
+/* Counter content */
+
+
 
 /* counter screen */
-
-.card-basic {
-    max-width: 300px;
-    --border-radius: 4px;   
-}
-
-.card-basic::part(body) {
+.tally::part(body) {
     background-color: brown;
 }
 
@@ -38,7 +39,14 @@
     justify-content: space-between;
 }
 
-/* buttons */
+/* Buttons */
+
+.buttons {
+    display: flex;
+    justify-content: center;
+}
+
+/* Individual buttons */
 
 .button {
     padding: 10px;

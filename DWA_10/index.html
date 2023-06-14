@@ -13,8 +13,8 @@
 <body>
     <main class="counter">
 
-        <sl-card class="card-header">
-            <div slot="header">
+        <sl-card class="counter__top">
+            <div slot="header" class="counter__top_header">
                 <h1>Tally Name Here</h1>
                 <sl-icon-button name="arrow-clockwise" label="Settings" id="reset-button" data-tally-reset></sl-icon-button>
                 <sl-popup class="popup" anchor="reset-button" placement="top" data-tally-popup>
@@ -25,13 +25,13 @@
                         </div>                      
                         You have reset your tally counter.
                       </sl-card>
-                  </sl-popup>
+                </sl-popup>
                 
                 <sl-icon-button name="gear" label="Settings"></sl-icon-button>
             </div>
           
-            <sl-card class="card-basic" data-tally>
-                This is just a basic card. No image, no header, and no footer. Just your content.
+            <sl-card class="tally" data-tally>
+                Current count goes here.
             </sl-card>
         </sl-card>       
         

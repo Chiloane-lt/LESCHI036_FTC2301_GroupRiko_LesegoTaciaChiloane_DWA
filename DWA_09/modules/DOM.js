@@ -1,11 +1,16 @@
+/* eslint-disable import/prefer-default-export */
 // @ts-check
 
 /**
  * Html elements accessed via queryselector.
- * @type {object}
+ * @type {object} getHtml
+ * @property {object} view
+ * @property {object} scroll
+ * @property {object} preview
+ * @property {object} display
+ * @property {object} search
  */
-// eslint-disable-next-line import/prefer-default-export
-export const html = {
+export const getHtml = {
   view: {
     mainHtml: document.querySelector('[data-list-items]'),
   },

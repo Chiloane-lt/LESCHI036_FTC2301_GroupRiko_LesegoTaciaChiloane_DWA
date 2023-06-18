@@ -3,8 +3,9 @@
 // @ts-check
 
 import { initialPageLoad, createShowMoreButton, showMorePages } from './modules/page-loading.js';
-import './modules/summary.js';
+import { showPreview } from './modules/load-summary.js';
 
 initialPageLoad();
 createShowMoreButton();
 showMorePages();
+showPreview();

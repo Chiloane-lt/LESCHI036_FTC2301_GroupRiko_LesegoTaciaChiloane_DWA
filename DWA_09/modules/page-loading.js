@@ -2,10 +2,15 @@
 /* eslint-disable import/prefer-default-export */
 // @ts-check
 
-import { html } from './DOM.js';
+import { getHtml } from './DOM.js';
 import { BOOKS_PER_PAGE, authors, books } from './data.js';
 import { BookButton } from './preview.js';
 
+/**
+ * Current page number. Used to traverse the books button in sections
+ * of 36 since each page is to contain only 36 books.
+ * @type {number}
+ */
 let page = 0;
 
 /**
@@ -45,6 +50,9 @@ export const createPreviewsFragment = (array, start, end) => {
     } = booksSlice[i];
     const authorName = authors[author];
 
+    /**
+     * @type {object}
+     */
     const preview = {
       authorName,
       id,
@@ -75,31 +83,31 @@ export const initialPageLoad = () => {
   }
   const fragment = createPreviewsFragment(books, 0, 36);
   // Add check to see if fragment created
-  html.view.mainHtml.appendChild(fragment);
+  getHtml.view.mainHtml.appendChild(fragment);
   window.scrollTo({ top: 0, behavior: 'smooth' });
   page += 1;
 };
 
 export const createShowMoreButton = () => {
   const booksRemaining = updateRemaining(books, page);
-  html.scroll.moreButton.innerHTML = `
+  getHtml.scroll.moreButton.innerHTML = `
     <span>Show more</span>
     <span class="list__remaining"> (${booksRemaining > 0 ? booksRemaining : 0})</span>
 `;
 };
 
 export const showMorePages = () => {
-  html.scroll.moreButton.addEventListener('click', () => {
+  getHtml.scroll.moreButton.addEventListener('click', () => {
     let booksRemaining = updateRemaining(books, page);
     if (booksRemaining <= 0) {
       // eslint-disable-next-line no-unused-expressions
-      html.scroll.moreButton.disabled;
+      getHtml.scroll.moreButton.disabled;
     } else {
       const start = page * BOOKS_PER_PAGE;
       const end = (page + 1) * BOOKS_PER_PAGE;
       const newFragment = createPreviewsFragment(books, start, end);
 
-      html.view.mainHtml.appendChild(newFragment);
+      getHtml.view.mainHtml.appendChild(newFragment);
       page += 1;
       booksRemaining = updateRemaining(books, page);
       createShowMoreButton();

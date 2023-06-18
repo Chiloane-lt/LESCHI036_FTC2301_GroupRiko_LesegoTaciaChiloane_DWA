@@ -3,6 +3,10 @@
 const template = document.createElement('template');
 template.innerHTML = `
 <style>
+* {
+  box-sizing: border-box;
+}
+
 .preview {
     border-width: 0;
     width: 100%;
@@ -86,7 +90,7 @@ export class BookButton extends HTMLElement {
     this.shadow.querySelector('.preview__image').src = `${image}`;
     this.shadow.querySelector('.preview__title').innerText = `${title}`;
     this.shadow.querySelector('.preview__author').innerText = `${authorName}`;
-    this.shadow.querySelector('.preview').setAttribute('data-preview', id);
+    this.setAttribute('data-preview', id);
   }
 }
 

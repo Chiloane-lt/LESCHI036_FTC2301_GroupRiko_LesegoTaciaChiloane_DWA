@@ -1,5 +1,6 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/prefer-default-export */
+
 // @ts-check
 
 const template = document.createElement('template');
@@ -120,7 +121,7 @@ template.innerHTML = `
     }
   </style>
 
-  <dialog open class="overlay" data-list-active>
+  <dialog class="overlay" data-list-active>
     <div class="overlay__preview"><img class="overlay__blur" data-list-blur src="" /><img class="overlay__image"
         data-list-image src="" /></div>
     <div class="overlay__content">
@@ -141,20 +142,38 @@ export class BookCard extends HTMLElement {
   constructor(book) {
     super();
     const { content } = template;
-    this.shadow.appendChild(content.cloneNode(true));
 
     const {
       author, image, title, description, published,
     } = book;
 
-    const year = new Date(published).getFullYear();
+    this.shadow.appendChild(content.cloneNode(true));
 
     this.shadow.querySelector('[data-list-blur]').src = `${image}`;
     this.shadow.querySelector('[data-list-image]').src = `${image}`;
     this.shadow.querySelector('[data-list-title]').innerText = `${title}`;
-    this.shadow.querySelector('[data-list-subtitle]').innerText = `${authors[author]} (${year})`;
+    this.shadow.querySelector('[data-list-subtitle]').innerText = `${author} (${published})`;
     this.shadow.querySelector('[data-list-description]').innerText = `${description}`;
+  }
+
+  closeModal = () => {
+    this.shadow.querySelector('[data-list-active]')?.close();
+  };
+
+  connectedCallback() {
+    // Check if container has active attribute. Open modal if true. - check
+    // Listen for close button. - check
+    // If close is clicked close modal. - check
+    // Delete entire buton. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // Fix all ESLint errors. What are question marks?
+    this.shadow.querySelector('[data-list-active]').showModal();
+    this.shadow.querySelector('[data-list-close]')?.addEventListener('click', this.closeModal);
+  }
+
+  disconnectedCallback() {
+    this.shadow.querySelector('[data-list-close]')?.removeEventListener('click', this.closeModal);
   }
 }
 
-export default customElements.define('book-summary', BookCard);
+customElements.define('book-summary', BookCard);
+export default BookCard;

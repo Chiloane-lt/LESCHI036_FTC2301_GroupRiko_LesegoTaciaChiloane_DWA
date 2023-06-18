@@ -10,6 +10,10 @@
  */
 export const BOOKS_PER_PAGE = 36;
 
+/**
+ * Aurthor ID and name as key:value pairs.
+ * @type {object}
+ */
 export const authors = {
   '194e164b-9365-4358-b44a-f28a93cc528f': 'Steven D. Levitt',
   '76e8065c-fd7a-4a8b-a8ea-6105a47d0781': 'Stephen J. Dubner',
@@ -174,7 +178,7 @@ export const genres = {
 /**
  * @typedef {Object} book - A specific book instance
  * @property {string} id - Book ID
- * @property {Array} genres - List of genres by ID
+ * @property {Array<string>} genres - List of genres by ID
  * @property {number} popularity - Given as number out of a 100
  * @property {string} title - title of book
  * @property {string} image - URL link to image as a string
@@ -186,7 +190,7 @@ export const genres = {
 
 /**
  * An array containing books as objects.
- * @type {Array.<book>}
+ * @type {Array<book>}
  */
 export const books = [
   {

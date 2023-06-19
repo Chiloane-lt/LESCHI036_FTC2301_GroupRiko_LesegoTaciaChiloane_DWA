@@ -41,8 +41,6 @@ export const showPreview = () => {
     button.addEventListener('click', () => {
       const summaryId = button.getAttribute('data-preview');
 
-      // create and open summary when button is clocked. - check
-      // Append summary to book button or html afterwards - check
       const bookSummary = createSummary(summaryId);
       getHtml.view.mainHtml.insertAdjacentElement('afterend', bookSummary);
     });

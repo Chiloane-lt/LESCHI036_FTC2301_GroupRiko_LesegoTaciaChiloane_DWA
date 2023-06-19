@@ -44,7 +44,7 @@ export const showPreview = () => {
       // create and open summary when button is clocked. - check
       // Append summary to book button or html afterwards - check
       const bookSummary = createSummary(summaryId);
-      getHtml.view.mainHtml.insertBefore(bookSummary, button);
+      getHtml.view.mainHtml.insertAdjacentElement('afterend', bookSummary);
     });
   });
 };

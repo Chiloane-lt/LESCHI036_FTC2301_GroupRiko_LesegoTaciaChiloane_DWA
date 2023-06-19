@@ -158,14 +158,16 @@ export class BookCard extends HTMLElement {
 
   closeModal = () => {
     this.shadow.querySelector('[data-list-active]')?.close();
+    this.remove();
   };
 
   connectedCallback() {
     // Check if container has active attribute. Open modal if true. - check
     // Listen for close button. - check
     // If close is clicked close modal. - check
-    // Delete entire buton. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // Delete entire buton. - check
     // Fix all ESLint errors. What are question marks?
+
     this.shadow.querySelector('[data-list-active]').showModal();
     this.shadow.querySelector('[data-list-close]')?.addEventListener('click', this.closeModal);
   }

@@ -1,11 +1,9 @@
 // Set up store
 const createStore = (reducer) => {
   let state;
-  const listeners = [];
+  let listeners = [];
 
-  const getState = () => {
-    return state;
-  };
+  const getState = () => state;
 
   const dispatch = (action) => {
     state = reducer(state, action);
@@ -16,7 +14,7 @@ const createStore = (reducer) => {
     listeners.push(listener);
 
     return () => {
-      listeners = listeners.filter(l => l !== listener);
+      listeners = listeners.filter((l) => l !== listener);
     };
   };
 
@@ -27,7 +25,7 @@ const createStore = (reducer) => {
     dispatch,
     subscribe,
   };
-}
+};
 
 // Set up Reducer
 const reducer = (state = 0, action) => {
@@ -35,13 +33,13 @@ const reducer = (state = 0, action) => {
     case 'ADD_COUNTER':
       return state + 1;
     case 'SUBTRACT_COUNTER':
-    return state - 1;
+      return state - 1;
     case 'RESET_COUNTER':
       return state = 0;
     default:
       return state;
   }
-}
+};
 
 // Create Redux Store for counter
 const store = createStore(reducer);
@@ -60,14 +58,14 @@ const getHtml = {
 const updateCounter = () => {
   const counter = store.getState();
   getHtml.tally.innerHTML = counter;
-}
+};
 
 // Subscribe to store update
 const unsubscribe = store.subscribe(updateCounter);
 
 // Event listeners for buttons
 getHtml.addButton.addEventListener('click', () => {
-  store.dispatch({ type:'ADD_COUNTER' });
+  store.dispatch({ type: 'ADD_COUNTER' });
 });
 
 getHtml.subtractButton.addEventListener('click', () => {
@@ -76,7 +74,8 @@ getHtml.subtractButton.addEventListener('click', () => {
 
 getHtml.resetButton.addEventListener('click', () => {
   store.dispatch({ type: 'RESET_COUNTER' });
+  getHtml.resetMessage?.setAttribute('active', '');
+  getHtml.resetMessageClose?.addEventListener('click', () => {
+    getHtml.resetMessage?.removeAttribute('active');
+  });
 });
-
-
-

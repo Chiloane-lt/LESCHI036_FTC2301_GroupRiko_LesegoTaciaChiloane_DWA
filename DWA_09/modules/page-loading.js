@@ -41,7 +41,6 @@ export const createPreview = (book) => {
  */
 export const createPreviewsFragment = (array, start, end) => {
   const booksSlice = array.slice(start, end);
-
   const previewFragment = document.createDocumentFragment();
 
   for (let i = 0; i < booksSlice.length; i += 1) {
@@ -59,6 +58,7 @@ export const createPreviewsFragment = (array, start, end) => {
       image,
       title,
     };
+
     previewFragment.appendChild(createPreview(preview));
   }
   return previewFragment;

@@ -6,7 +6,14 @@ import { authors, books } from './data.js';
 import { BookCard } from './summary.js';
 import { getHtml } from './DOM.js';
 
+/**
+ * @param {*} bookId
+ * @returns {Element}
+ */
 export const createSummary = (bookId) => {
+  /**
+   * @type {import('./data.js').book}
+   */
   const extractedBookObject = books.find((book) => book.id === bookId);
 
   const {

@@ -18,7 +18,7 @@ class MyCounter extends LitElement {
   :host {
     --main-light-color: #D3D4D9;
     --main-dark-color: #252627;
-    --main-accent-color: #BB0A21;
+    --main-accent-color: #60af7e;
   }
 
   * {
@@ -36,7 +36,8 @@ class MyCounter extends LitElement {
     height: 100vh;
   }
 
-  .header {
+  .tally {
+    color: var(--main-light-color);
     width: 15rem;
     border: 2px solid var(--main-light-color);
     border-radius: 1rem;
@@ -48,9 +49,17 @@ class MyCounter extends LitElement {
     text-align: center;
   }
 
-  .tally {
+  .tally__title{
+    margin: 5px 5px 10px 5px;
+  }
+
+  .tally__count {
     width: 100%;
     margin: auto;
+    background-color: var(--main-accent-color);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    font-size: 4rem;
   }
 
   dialog {
@@ -121,14 +130,12 @@ class MyCounter extends LitElement {
   render() {
     return html`
     <div class="container">
-      <div class="header">
-        <h1>Tally Counter</h1>
-        <h1 class="tally">${this.tally}</h1>
-        <div class="header__settings">
-        </div>
+      <div class="tally">
+        <h1 class="tally__title">Tally Counter</h1>
+        <h1 class="tally__count">${this.tally}</h1>
       </div>
 
-      <dialog open>
+      <dialog>
         <div class="form">
           <div class="form__header">
             <h2>Tally Settings</h2>

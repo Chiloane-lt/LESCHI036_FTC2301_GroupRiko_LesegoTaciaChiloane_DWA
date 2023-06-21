@@ -102,12 +102,10 @@ console.log(
     return jibberish;
   }, ''),
   products.reduce((newProducts, item) => {
-    let newArr = Object.entries(item);
-    var [[,a],[,b]] = newArr;
-    let newProduct = { name: a, cost: b };
+    const newArr = Object.entries(item);
+    const [[, a], [, b]] = newArr;
+    const newProduct = { name: a, cost: b };
     newProducts.push(newProduct);
     return newProducts;
   }, []),
-
-
 );

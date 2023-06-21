@@ -60,9 +60,14 @@ class MyCounter extends LitElement {
     font-size: 4rem;
   }
 
-  .reset__message {
+  dialog{
     position: absolute;
     margin: auto;
+    border-style: none;
+    background-color: #74747400;
+  }
+  .reset__message {
+    background-color: var(--main-light-color);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -111,12 +116,15 @@ class MyCounter extends LitElement {
         <h1 class="tally__count">${this.tally}</h1>
       </div>
 
-      <dialog class="reset__message">
-        <div class="reset__message_header">
-          <h3>Counter Reset</h3>
-          <button class="reset__message_close">X</button>
+      <dialog>
+        <div  class="reset__message">
+          <div class="reset__message_header">
+            <h3>Counter Reset</h3>
+            <button class="reset__message_close">X</button>
+          </div>
+          <p>Your counter has been reset to 0.</p>
         </div>
-        <p>Your counter has been reset to 0.</p>
+
       </dialog>
 
       <div class="buttons">

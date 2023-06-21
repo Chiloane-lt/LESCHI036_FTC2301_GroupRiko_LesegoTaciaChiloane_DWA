@@ -61,7 +61,7 @@ const updateCounter = () => {
 };
 
 // Subscribe to store update
-const unsubscribe = store.subscribe(updateCounter);
+store.subscribe(updateCounter);
 
 // Event listeners for buttons
 getHtml.addButton.addEventListener('click', () => {

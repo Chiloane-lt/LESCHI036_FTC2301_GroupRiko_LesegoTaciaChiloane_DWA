@@ -60,6 +60,31 @@ class MyCounter extends LitElement {
     font-size: 4rem;
   }
 
+  .reset__dialog {
+    position: absolute;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 2px solid var(--main-light-color);
+    border-radius: 8%;
+    padding: 1rem;
+    width: 200px;
+    height: 130px;
+  }
+
+  .reset__dialog_header{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .reset__dialog_close{
+    height: 25px;
+    width: 25px;
+    border: 1px solid var(--main-dark-color);
+    border-radius: 50%;
+  }
+
   .reset{
     font-size: 1rem;
     color: var(--main-dark-color);
@@ -85,9 +110,13 @@ class MyCounter extends LitElement {
         <h1 class="tally__title">Tally Counter</h1>
         <h1 class="tally__count">${this.tally}</h1>
       </div>
-
-
-
+      <dialog class="reset__dialog">
+        <div class="reset__dialog_header">
+          <h3>Counter Reset</h3>
+          <button class="reset__dialog_close">X</button>
+        </div>
+        <p>Your counter has been reset to 0.</p>
+      </dialog>
       <div class="buttons">
         <button @click=${this.add} class="tally__add buttons_tally">+</button>
         <button @click=${this.reset} class="reset">⇔</button>

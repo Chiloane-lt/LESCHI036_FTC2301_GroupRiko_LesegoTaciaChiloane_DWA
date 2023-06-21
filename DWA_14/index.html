@@ -7,9 +7,18 @@
   <meta name="description" content="My own implementation of the Tally Counter App">
   <script src="./script.js" type="module" defer></script>
   <script src="https://kit.fontawesome.com/0b821e41f3.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
   <title>Tally App</title>
 </head>
 <body>
+  <header>
+    <nav class="header__nav">
+      <div>Logo Here</div>
+      <div>Tally Settings</div>
+      <display-toggle></display-toggle>
+    </nav>
+  </header>
+  <tally-settings></tally-settings>
   <my-counter></my-counter>
 </body>
 </html>

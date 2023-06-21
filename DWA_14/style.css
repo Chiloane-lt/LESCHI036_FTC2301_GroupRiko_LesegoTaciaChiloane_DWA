@@ -1,0 +1,23 @@
+:root {
+  --main-light-color: #D3D4D9;
+  --main-dark-color: #252627;
+  --main-accent-color: #60af7e;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.header__nav {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  padding: 1rem;
+  background-color: var(--main-dark-color);
+  color: var(--main-light-color);
+}
+
+
+

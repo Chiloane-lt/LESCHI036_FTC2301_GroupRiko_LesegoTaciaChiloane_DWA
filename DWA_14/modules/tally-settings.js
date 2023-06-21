@@ -31,7 +31,11 @@ class TallySettings extends LitElement {
   dialog {
   border: 2px solid var(--main-light-color);
   border-radius: 8%;
+  border-style: none;
   padding: 1rem;
+  position: absolute;
+  margin: auto;
+
   }
 
   .form {
@@ -78,7 +82,7 @@ class TallySettings extends LitElement {
 
   render() {
     return html`
-    <dialog ${this.status}>
+    <dialog ${this.status} open>
     <div class="form">
       <div class="form__header">
         <h2>Tally Settings</h2>

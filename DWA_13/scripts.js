@@ -89,10 +89,6 @@ function convertToInt(num) {
   return parseInt(num);
 }
 
-function adding(total, price) {
-
-}
-
 console.log(
   products.filter((item) => item.product.length < 6),
   products.map(product => convertToInt(product.price)).filter(chechPrice).reduce((sum, price) => {

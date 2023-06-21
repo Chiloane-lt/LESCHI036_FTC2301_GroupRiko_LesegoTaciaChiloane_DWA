@@ -82,16 +82,21 @@ products.forEach((item) => {
 });
 
 function chechPrice(num) {
-  return num !== '';
+  return num;
 }
 
-function convertToString(num) {
-  return num.toString();
+function convertToInt(num) {
+  return parseInt(num);
 }
-products.map((item.price) => {})
+
+function adding(total, price) {
+
+}
 
 console.log(
-  products.filter((item) => item.product.length < 6), '\n',
-
-  // Your code here
+  products.filter((item) => item.product.length < 6),
+  products.map(product => convertToInt(product.price)).filter(chechPrice).reduce((sum, price) => {
+    sum += price;
+    return sum;
+  }, 0),
 );

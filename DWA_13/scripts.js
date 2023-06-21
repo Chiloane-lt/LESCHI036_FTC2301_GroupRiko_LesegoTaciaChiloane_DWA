@@ -95,4 +95,9 @@ console.log(
     sum += price;
     return sum;
   }, 0),
+  products.reduce((jibberish, item) => {
+    jibberish += item.product;
+    return jibberish;
+  }, ''),
+  
 );

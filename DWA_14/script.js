@@ -9,14 +9,14 @@ class MyCounter extends LitElement {
   constructor() {
     super();
     this.tally = 0;
-    this.min = Infinity;
-    this.max = Infinity;
+    this.min = 2;
+    this.max = 8;
     this.display = 'day';
   }
 
   static styles = css`
   :host {
-    --backg-light-color: #D3D4D9;
+    --main-light-color: #D3D4D9;
     --main-dark-color: #252627;
     --main-accent-color: #BB0A21;
   }
@@ -25,7 +25,6 @@ class MyCounter extends LitElement {
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
-    color: #D3D4D9
   }
 
   .container{
@@ -39,7 +38,7 @@ class MyCounter extends LitElement {
 
   .header {
     width: 15rem;
-    border: 2px solid var(--backg-light-color);
+    border: 2px solid var(--main-light-color);
     border-radius: 1rem;
     padding: 1rem;
     margin: 1rem;
@@ -54,15 +53,51 @@ class MyCounter extends LitElement {
     margin: auto;
   }
 
-  input{
+  dialog {
+  border: 2px solid var(--main-light-color);
+  border-radius: 8%;
+  padding: 1rem;
+  }
+
+  .form {
+    width: 200px;
+    height: 180px;
+  }
+
+  .form__header{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  .form__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form__content_input{
+    padding: 10px;
+  }
+
+  input {
+    width: 120px;
+    border-radius: 1rem;
+  }
+
+  .form__close {
+    height: 25px;
+    width: 25px;
+    border: 1px solid var(--main-dark-color);
+    border-radius: 50%;
+  }
+
+  .form__submit{
+    margin: 10px;
+    padding: .8rem 3rem .8rem 3rem;
+    border: 1rem, solid, var(--main-dark-color);
+    border-radius: 1.5rem;
     font-size: 1rem;
     color: var(--main-dark-color);
-    width: 2rem;
-    height: 2rem;
-    margin: .2rem;
-    border: .2rem, solid, var(--main-dark-color);
-    border-radius: 40%;
-
   }
 
   .reset{
@@ -90,22 +125,31 @@ class MyCounter extends LitElement {
         <h1>Tally Counter</h1>
         <h1 class="tally">${this.tally}</h1>
         <div class="header__settings">
-
-          <div>
-            <label for="max">Max.</label>
-            <input type="number" id="max">
-            <button @click=${this.setMax} class="header__button">Set</button>
-          </div>
-
-          <div>
-            <label for="min">Min.</label>
-            <input type="number" id="min">
-            <button @click=${this.setMin} class="header__button">Set</button>
-          </div>
-
-
         </div>
       </div>
+
+      <dialog open>
+        <div class="form">
+          <div class="form__header">
+            <h2>Tally Settings</h2>
+            <button class="form__close">x</button>
+          </div>
+
+          <div class="form__content">
+            <div class="form__content_input">
+              <label for="max">Max.</label>
+              <input type="number" id="max">
+            </div>
+
+            <div class="form__content_input">
+              <label for="min">Min.</label>
+              <input type="number" id="min">
+            </div>
+
+            <button class="form__submit">Save</button>
+          </div>
+        </div>
+      </dialog>
 
       <div class="buttons">
         <button @click=${this.add} class="tally__add buttons_tally">+</button>
@@ -126,21 +170,6 @@ class MyCounter extends LitElement {
 
   reset() {
     this.tally = 0;
-  }
-
-  setMax(event) {
-    const input = event.target;
-    if (input !== '') {
-      this.max = input.value;
-    }
-  }
-
-  setMin(event) {
-    const input = event.target;
-    if (input !== '') {
-      this.min = input.value;
-    }
-    
   }
 }
 

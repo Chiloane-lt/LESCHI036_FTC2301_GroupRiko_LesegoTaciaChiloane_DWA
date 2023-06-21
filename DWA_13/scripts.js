@@ -91,13 +91,23 @@ function convertToInt(num) {
 
 console.log(
   products.filter((item) => item.product.length < 6),
-  products.map(product => convertToInt(product.price)).filter(chechPrice).reduce((sum, price) => {
+  products.map((product) => convertToInt(product.price)).filter(chechPrice).reduce((sum, price) => {
+    // eslint-disable-next-line no-param-reassign
     sum += price;
     return sum;
   }, 0),
   products.reduce((jibberish, item) => {
+    // eslint-disable-next-line no-param-reassign
     jibberish += item.product;
     return jibberish;
   }, ''),
-  
+  products.reduce((newProducts, item) => {
+    let newArr = Object.entries(item);
+    var [[,a],[,b]] = newArr;
+    let newProduct = { name: a, cost: b };
+    newProducts.push(newProduct);
+    return newProducts;
+  }, []),
+
+
 );

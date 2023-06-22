@@ -212,7 +212,8 @@ class MyCounter extends LitElement {
             <h3>Counter Reset</h3>
             <button @click=${this.closeResetDialog} class="reset__message_close">X</button>
           </div>
-          <p>Your counter has been reset to 0.</p>
+          <p>Your counter has been reset to 0. You can start a new tally.
+          </p>
         </div>
       </dialog>
 

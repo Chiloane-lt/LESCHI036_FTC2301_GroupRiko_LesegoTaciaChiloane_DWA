@@ -106,8 +106,7 @@ class TallySettings extends LitElement {
   </dialog>
     `;
   }
-
-  // Doesn't work. Fix later.
+  
   closeDialog() {
     this.renderRoot.querySelector('dialog').close();
   }

@@ -1,15 +1,28 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable import/extensions */
 import { LitElement, html, css } from '../libs/lit-html.js';
 
 class MyCounter extends LitElement {
+  get _inputMax() {
+    return (this.___inputMax ??= this.renderRoot?.querySelector('.limit__max') ?? null);
+  }
+
+  get _inputMin() {
+    return (this.___inputMin ??= this.renderRoot?.querySelector('.limit__min') ?? null);
+  }
+
   static properties = {
-    name: {},
-    tally: {},
+    tally: { type: Number },
+    maximum: { type: Number },
+    minimum: { type: Number },
   };
 
   constructor() {
     super();
     this.tally = 0;
+    this.maximum = '';
+    this.minimum = '';
   }
 
   static styles = css`
@@ -95,8 +108,9 @@ class MyCounter extends LitElement {
     padding: 10px;
   }
 
-  input {
-    width: 120px;
+  .limit {
+    height: 30px;
+    width: 80px;
     border-radius: 1rem;
   }
 
@@ -108,12 +122,11 @@ class MyCounter extends LitElement {
   }
 
   .form__submit{
-    margin: 10px;
-    padding: .8rem 3rem .8rem 3rem;
-    border: 1rem, solid, var(--main-dark-color);
-    border-radius: 1.5rem;
-    font-size: 1rem;
-    color: var(--main-dark-color);
+    height: 30px;
+    width: 30px;
+    border: 1px solid var(--main-dark-color);
+    border-radius: 40%;
+    margin-left: 15px;
   }
 
   .reset-dialog {
@@ -184,7 +197,7 @@ class MyCounter extends LitElement {
       </div>
 
       <dialog class="tally-settings">
-        <div class="form">
+        <form class="form">
           <div class="form__header">
             <h2>Tally Settings</h2>
             <button @click=${this.closeSettingsDialog} class="form__close">x</button>
@@ -193,17 +206,17 @@ class MyCounter extends LitElement {
           <div class="form__content">
             <div class="form__content_input">
               <label for="max">Max.</label>
-              <input type="number" id="max">
+              <input type="number" id="max" class="limit limit__max">
+              <button @click=${this.submitMax} type="submit" class="form__submit">✔</button>
             </div>
 
             <div class="form__content_input">
               <label for="min">Min.</label>
-              <input type="number" id="min">
+              <input type="number" id="min" class="limit limit__min">
+              <button @click=${this.submitMin} type="submit" class="form__submit">✔</button>
             </div>
-
-            <button class="form__submit">Save</button>
           </div>
-        </div>
+        </form>
       </dialog>
 
       <dialog class="reset-dialog">
@@ -226,11 +239,25 @@ class MyCounter extends LitElement {
   }
 
   add() {
-    this.tally += 1;
+    if (this.maximum === '') {
+      this.tally += 1;
+    } else if (this.tally < this.maximum) {
+      this.tally += 1;
+    } else {
+      // Disable button here
+      this.renderRoot.querySelector('.tally__add').disabled
+    }
   }
 
   subtract() {
-    this.tally -= 1;
+    if (this.minimum === '') {
+      this.tally -= 1;
+    } else if (this.tally > this.minimum) {
+      this.tally -= 1;
+    } else {
+      // Disable button here
+      this.renderRoot.querySelector('.tally__subtract').disabled
+    }
   }
 
   reset() {
@@ -246,8 +273,19 @@ class MyCounter extends LitElement {
     this.renderRoot.querySelector('.tally-settings').showModal();
   }
 
-  closeSettingsDialog() {
+  closeSettingsDialog(e) {
+    e.preventDefault();
     this.renderRoot.querySelector('.tally-settings').close();
+  }
+
+  submitMax(e) {
+    e.preventDefault();
+    this.maximum = this._inputMax.value.trim();
+  }
+
+  submitMin(e) {
+    e.preventDefault();
+    this.minimum = this._inputMin.value.trim();
   }
 }
 

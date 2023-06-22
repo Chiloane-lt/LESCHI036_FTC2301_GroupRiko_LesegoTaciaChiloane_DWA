@@ -59,7 +59,7 @@ export class DisplayToggle extends LitElement {
     justify-content: center;
     align-items: center;
     content: "☾";
-    font-size: 22px;
+    font-size: 18px;
     color: var(--main-light-color);
     width: 22px;
     height: 22px;

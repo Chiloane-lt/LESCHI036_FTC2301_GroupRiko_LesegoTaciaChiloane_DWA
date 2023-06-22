@@ -238,6 +238,12 @@ class MyCounter extends LitElement {
     `;
   }
 
+// TODO
+// Add error if max is less than min.
+// Add functionality to display settings button.
+// Reset counter whenever max or min is set.
+// Change so that whenever above occurs, reset value is equal to min value if min is above 0;
+
   add() {
     if (this.maximum === '') {
       this.tally += 1;

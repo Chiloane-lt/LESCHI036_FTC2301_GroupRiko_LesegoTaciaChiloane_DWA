@@ -1,18 +1,18 @@
 /* eslint-disable import/extensions */
-import { LitElement, html, css } from '../libs/lit-html.js';
+import { LitElement, html, css, classMap } from '../libs/lit-html.js';
 
 class TallySettings extends LitElement {
   static properties = {
-    status: {},
-    max: {},
-    min: {},
+    max: { type: Number },
+    min: { type: Number },
+    open: { type: Boolean },
   };
 
   constructor() {
     super();
     this.max = undefined;
     this.min = undefined;
-    this.status = 'open';
+    this.open = true;
   }
 
   static styles = css`
@@ -28,7 +28,7 @@ class TallySettings extends LitElement {
     padding: 0px;
   }
 
-  dialog {
+  .tally-settings {
   border: 2px solid var(--main-light-color);
   border-radius: 8%;
   border-style: none;
@@ -82,7 +82,7 @@ class TallySettings extends LitElement {
 
   render() {
     return html`
-    <dialog ${this.status} open>
+  <dialog open class="tally-settings">
     <div class="form">
       <div class="form__header">
         <h2>Tally Settings</h2>
@@ -109,7 +109,7 @@ class TallySettings extends LitElement {
 
   // Doesn't work. Fix later.
   closeDialog() {
-    this.status = 'closed';
+    this.renderRoot.querySelector('dialog').close();
   }
 }
 

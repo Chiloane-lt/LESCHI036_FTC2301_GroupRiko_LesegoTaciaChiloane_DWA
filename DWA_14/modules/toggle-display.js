@@ -92,7 +92,7 @@ export class DisplayToggle extends LitElement {
     return html`
     <div class="switch">
       <input type="checkbox" id="check" class="switch__bg">
-      <label for="check" class="switch__label">Bob</label>
+      <label for="check" class="switch__label"></label>
     </div>
     `;
   }

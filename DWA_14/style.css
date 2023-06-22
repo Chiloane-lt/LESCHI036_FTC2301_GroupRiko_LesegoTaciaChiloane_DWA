@@ -19,5 +19,13 @@
   color: var(--main-light-color);
 }
 
+.icon {
+  filter: invert(64%) sepia(23%) saturate(628%) hue-rotate(90deg) brightness(91%) contrast(98%);
+  width: 35px;
+}
 
+.header__nav_name {
+  font-size: 20px;
+  font-family: 'Permanent Marker', cursive;
+}
 

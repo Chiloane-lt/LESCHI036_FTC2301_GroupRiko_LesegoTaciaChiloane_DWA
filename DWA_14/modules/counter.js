@@ -243,6 +243,7 @@ class MyCounter extends LitElement {
 // Add functionality to display settings button.
 // Reset counter whenever max or min is set.
 // Change so that whenever above occurs, reset value is equal to min value if min is above 0;
+// Implement Redux to track state.
 
   add() {
     if (this.maximum === '') {

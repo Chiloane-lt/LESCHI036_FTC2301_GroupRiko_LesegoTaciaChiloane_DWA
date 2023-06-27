@@ -26,8 +26,7 @@
 /**
  * @type {State}
  */
-const state = {
-  name: 'Tally Counter',
+const INITIAL_STATE = {
   display: 'night',
   tally: 0,
   limits: {
@@ -42,4 +41,11 @@ const state = {
       reached: false,
     },
   },
+};
+
+function getDisplayMode() {
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    return 'night';
+  }
+  return 'day';
 }

@@ -83,14 +83,6 @@ class MyCounter extends LitElement {
   border-radius: 8%;
   border-style: none;
   padding: 1rem;
-  position: absolute;
-  margin: auto;
-
-  }
-
-  .form {
-    width: 200px;
-    height: 180px;
   }
 
   .form__header{
@@ -109,9 +101,9 @@ class MyCounter extends LitElement {
   }
 
   .limit {
-    height: 30px;
-    width: 80px;
-    border-radius: 1rem;
+    height: 2rem;
+    border-radius: .6rem;
+    border-width: 0.02rem;
   }
 
   .form__close {
@@ -119,14 +111,6 @@ class MyCounter extends LitElement {
     width: 25px;
     border: 1px solid var(--main-dark-color);
     border-radius: 50%;
-  }
-
-  .form__submit{
-    height: 30px;
-    width: 30px;
-    border: 1px solid var(--main-dark-color);
-    border-radius: 40%;
-    margin-left: 15px;
   }
 
   .reset-dialog {
@@ -206,15 +190,17 @@ class MyCounter extends LitElement {
           <div class="form__content">
             <div class="form__content_input">
               <label for="max">Max.</label>
-              <input type="number" id="max" class="limit limit__max">
-              <button @click=${this.submitMax} type="submit" class="form__submit">✔</button>
+              <input type="number" id="max" class="limit">
             </div>
-
             <div class="form__content_input">
               <label for="min">Min.</label>
-              <input type="number" id="min" class="limit limit__min">
-              <button @click=${this.submitMin} type="submit" class="form__submit">✔</button>
+              <input type="number" id="min" class="limit">
             </div>
+            <div class="form__content_input">
+              <label for="step-value">Increment/decrement by:</label>
+              <input type="number" id="step-value" class="limit">
+            </div>
+            <button>Save</button>
           </div>
         </form>
       </dialog>
@@ -243,6 +229,9 @@ class MyCounter extends LitElement {
 // Add functionality to display settings button.
 // Reset counter whenever max or min is set.
 // Change so that whenever above occurs, reset value is equal to min value if min is above 0;
+// Add option to set counter starting value;
+// Add option to set step value.
+// Display min & max if set.
 // Implement Redux to track state.
 
   add() {

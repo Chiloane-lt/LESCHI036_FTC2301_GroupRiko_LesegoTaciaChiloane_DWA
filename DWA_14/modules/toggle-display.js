@@ -3,15 +3,6 @@
 import { LitElement, html, css } from '../libs/lit-html.js';
 
 export class DisplayToggle extends LitElement {
-  static properties = {
-    mode: {},
-  };
-
-  constructor() {
-    super();
-    this.mode = '☾';
-  }
-
   static styles = css`
     :host {
     --main-light-color: #D3D4D9;
